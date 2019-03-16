@@ -8,10 +8,6 @@ image:https://api.codacy.com/project/badge/Grade/fc7dc1da60ee4e9fb67ccff78262579
 
 Cristian Lado González
 
-Jorge Álvarez Fidalgo
-
-Othmane Bakhtaoui
-
 Mª Isabel Fernández Pérez
 
 Álvaro González Carracedo
