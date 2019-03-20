@@ -10,8 +10,18 @@ describe('Simple test', function () {
 })
   
 describe('Semantic chat constructor', function () {
-  it('getUrl and getInterlocutorWebId tests', function () {
+  it('getUrl and getInterlocutorWebId', function () {
     assert.equal(chat.getUrl(), "http://prueba:8080");
     assert.equal(chat.getInterlocutorWebId(), 123);
+    assert.equal(chat.numberOfMessages, 0);
+  })
+  
+  it('loadMessage', function () {
+    chat.loadMessage("Hola");
+    assert.equal(chat.getMessages().length, 1);
+    assert.equal(chat.getMessages()[0], "Hola");
+    chat.loadMessage("Adiós");
+    assert.equal(chat.getMessages().length, 2);
+    assert.equal(chat.getMessages()[1], "Adiós");
   })
 })
