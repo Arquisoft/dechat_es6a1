@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "test": "mocha \"./test/*\"",
-    "coverage": "bash <(curl -s https://codecov.io/bash)",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "build:web": "webpack --config webpack.config.js",
     "build": "ng build",
     "test-with-coverage": "nyc --reporter text-lcov node_modules/.bin/_mocha --require @babel/register -R spec --timeout 100 && cat ./coverage/lcov.info | codacy-coverage && rm -rf ./coverage",
