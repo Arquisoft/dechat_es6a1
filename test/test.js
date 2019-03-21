@@ -4,7 +4,7 @@ const SemanticChat = require('../src/lib/semanticchat');
 const chat = new SemanticChat({ url: "http://prueba:8080", chatBaseUrl: "hola", interlocutorWebId: 123 });
 
 const Loaderjs = require('../src/lib/loader');
-const loader = new Loader();
+const loader = new Loaderjs();
 
 describe('Simple test', function () {
   it('2 + 2 = 4', function () {
@@ -31,6 +31,6 @@ describe('Semantic chat constructor', function () {
     it('loadMessageFromURL', function () {
       loader.loadFromUrl(chat.getUrl())
       assert.equal(chat.getMessages()[0], "Hola");
-      assert.equal(chat.getMessages()[1], "Adiós");
+      assert.equal(loader.loadFromUrl(chat.getUrl()), new SemanticChat({ url: "http://prueba:8080", chatBaseUrl: "hola", interlocutorWebId: 123 }));
   })
 })
