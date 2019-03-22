@@ -30,6 +30,7 @@ describe('Semantic chat constructor', function () {
   
     it('loadMessageFromURL', function () {
       loader.loadFromUrl(chat.getUrl(), 123, "hola");
-      assert.equal(loader.loadFromUrl(chat.getUrl()), new SemanticChat({ url: "http://prueba:8080", chatBaseUrl: "hola", interlocutorWebId: 123 }));
+      assert.equal(loader.loadFromUrl(chat.getUrl()).getUrl(), "http://prueba:8080");
+      assert.equal(loader.loadFromUrl(chat.getUrl()).getMessages().length, 0);
   })
 })
