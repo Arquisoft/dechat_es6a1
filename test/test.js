@@ -29,8 +29,9 @@ describe('Semantic chat constructor', function () {
   })
   
     it('loadMessageFromURL', function () {
-      loader.loadFromUrl(chat.getUrl(), 123, "hola");
-      assert.equal(loader.loadFromUrl(chat.getUrl()).getUrl(), "http://prueba:8080");
-      assert.equal(loader.loadFromUrl(chat.getUrl()).getMessages().length, 0);
+      var toTest=loader.loadFromUrl(chat.getUrl(), 123, "hola");
+      assert.equal(toTest.getUrl(), "http://prueba:8080");
+      assert.equal(toTest.getInterlocutorWebId(), 123);
+      assert.equal(toTest.getMessages().length, 0);
   })
 })
