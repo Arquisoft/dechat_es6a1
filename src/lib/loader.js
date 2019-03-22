@@ -10,9 +10,6 @@ const SemanticChat = require('./semanticchat');
  */
 class Loader {
 
-	constructor() {
-	}
-	
 	/**
 	 * This constructor creates an instance of Loader.
 	 * @param fetch: the function used to fetch the data
