@@ -4,7 +4,7 @@ const SemanticChat = require('../src/lib/semanticchat');
 const chat = new SemanticChat({ url: "http://prueba:8080", chatBaseUrl: "hola", interlocutorWebId: 123 });
 
 const Loaderjs = require('../src/lib/loader');
-const loader = new Loaderjs();
+const loader = new Loaderjs("hola");
 
 describe('Simple test', function () {
   it('2 + 2 = 4', function () {
