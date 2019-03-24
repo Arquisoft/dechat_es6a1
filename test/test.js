@@ -58,7 +58,7 @@ describe('Core tests', function () {
 	})
 	
 	it('getObjectFromPredicateForResource', async function () {
-		let s= await core.getObjectFromPredicateForResource("https://testdechat6a1.solid.community/profile/card#me", namespaces.foaf + 'name');
+		let s= await core.getObjectFromPredicateForResource("https://testdechat6a1.solid.community/profile/card#me",'name');
 		assert.equal(s, "Tests Dechat_6a1");
 	})
   
