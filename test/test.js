@@ -43,6 +43,12 @@ describe('Loader tests', function () {
 		assert.equal(s.getMessages().length, 0);
 	})
 	
+	it('_findMessage(NO FUNCIONA)', async function () {
+		let s= await loader.findWebIdOfInterlocutor("https://testdechat6a1.solid.community/profile/card#me", 123);
+		assert.equal(s.getUrl(), "https://testdechat6a1.solid.community/profile/card#me");
+		assert.equal(s,123);
+	})
+	
 })
 
 describe('Core tests', function () {
@@ -57,7 +63,7 @@ describe('Core tests', function () {
 		assert.equal(s, "Tests Dechat_6a1");
 	})
 	
-	it('getObjectFromPredicateForResource', async function () {
+	it('getObjectFromPredicateForResource(NO FUNCIONA)', async function () {
 		let s= await core.getObjectFromPredicateForResource("https://testdechat6a1.solid.community/profile/card#me",'name');
 		assert.equal(s, "Tests Dechat_6a1");
 	})
