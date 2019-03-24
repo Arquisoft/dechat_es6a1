@@ -56,5 +56,10 @@ describe('Core tests', function () {
 		let s= await core.getFormattedName("https://testdechat6a1.solid.community/profile/card#me");
 		assert.equal(s, "Tests Dechat_6a1");
 	})
+	
+	it('getObjectFromPredicateForResource', async function () {
+		let s= await core.getObjectFromPredicateForResource("https://testdechat6a1.solid.community/profile/card#me", namespaces.foaf + 'name');
+		assert.equal(s, "Tests Dechat_6a1");
+	})
   
 })
