@@ -5,7 +5,7 @@ const auth = require('solid-auth-client');
 const SemanticChat = require('../src/lib/semanticchat');
 const chat = new SemanticChat({ url: "http://prueba:8080", chatBaseUrl: "hola", interlocutorWebId: 123 });
 const SemanticChat2 = require('../src/lib/semanticchat');
-const chat2 = new SemanticChat({ url: "http://prueba2:8080", userWebId : 122, chatBaseUrl: "Adios", interlocutorWebId: 123 });
+const chat2 = new SemanticChat2({ url: "https://testdechat6a1.solid.community/profile/card#me", userWebId : 122, chatBaseUrl: "Adios", interlocutorWebId: 123 });
 
 const Loaderjs = require('../src/lib/loader');
 const loader = new Loaderjs(auth.fetch);
@@ -47,7 +47,7 @@ describe('Loader tests', function () {
 	
 	it('findWebIdOfInterlocutor(NO FUNCIONA)', async function () {
 		let s= await loader.findWebIdOfInterlocutor(chat2.getUrl(), 122);
-		assert.equal(s,123);
+		assert.equal(s,chat2.getInterlocutorWebId());
 	})
 	
 })
