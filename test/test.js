@@ -47,7 +47,7 @@ describe('Loader tests', function () {
 	
 	it('findWebIdOfInterlocutor(NO FUNCIONA)', async function () {
 		let s= await loader.findWebIdOfInterlocutor(chat2.getUrl(), 122);
-		assert.equal(s,chat2.getInterlocutorWebId());
+		assert.equal(s,123);
 	})
 	
 })
