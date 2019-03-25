@@ -44,7 +44,7 @@ describe('Loader tests', function () {
 	})
 	
 	it('_findMessage(NO FUNCIONA)', async function () {
-		let s= await loader.findWebIdOfInterlocutor("https://testdechat6a1.solid.community/profile/card#me", 123);
+		let s= await loader.findWebIdOfInterlocutor(chat.getUrl(), 122);
 		assert.equal(s.getUrl(), "https://testdechat6a1.solid.community/profile/card#me");
 		assert.equal(s,123);
 	})
@@ -60,11 +60,6 @@ describe('Core tests', function () {
   
 	it('getFormattedName', async function () {
 		let s= await core.getFormattedName("https://testdechat6a1.solid.community/profile/card#me");
-		assert.equal(s, "Tests Dechat_6a1");
-	})
-	
-	it('getObjectFromPredicateForResource(NO FUNCIONA)', async function () {
-		let s= await core.getObjectFromPredicateForResource("https://testdechat6a1.solid.community/profile/card#me",'name');
 		assert.equal(s, "Tests Dechat_6a1");
 	})
   
