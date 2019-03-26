@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   entry: './src/main/index.js',
@@ -15,4 +15,4 @@ module.exports = {
     '@trust/webcrypto': 'crypto',
     'fs': 'empty'
   }
-};
+}
