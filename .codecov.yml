@@ -1,6 +1,8 @@
-coverage:
-  status:
-    project:
-      paths:
-        - test/*
-        - src/lib/*
+codecov:
+  notify:
+    require_ci_to_pass: no
+    
+ ignore:
+  - "adocs" 
+  - "coverage"
+  
