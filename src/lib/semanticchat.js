@@ -1,62 +1,55 @@
 class SemanticChat {
+  constructor (options) {
+    this.url = options.url
+    this.userWebId = options.userWebId
+    this.interlocutorWebId = options.interlocutorWebId
+    this.chatBaseUrl = options.chatBaseUrl
+    this.messages = []
+    this.numberOfMessages = 0
 
-	constructor(options) {
+    // if move base url is a string create function that returns this string
+    // else a function so we leave it
+    if (typeof this.chatBaseUrl === 'string') {
+      const t = this.chatBaseUrl
 
-		this.url = options.url;
-		this.userWebId = options.userWebId;
-		this.interlocutorWebId = options.interlocutorWebId;
-		this.chatBaseUrl = options.chatBaseUrl;
-		this.messages = [];
-		this.numberOfMessages = 0;
+      this.chatBaseUrl = function () {
+        return t
+      }
+    }
 
-		// if move base url is a string create function that returns this string
-		// else a function so we leave it
-		if (typeof this.chatBaseUrl === 'string') {
-			const t = this.chatBaseUrl;
+    // set the default uniqid function to the function of the package 'uniqid'
+    if (!options.uniqid) {
+      this.uniqid = require('uniqid')
+    } else {
+      this.uniqid = options.uniqid
+    }
+  }
 
-			this.chatBaseUrl = function () {
-				return t;
-			}
-		}
+  /**
+   * This method must return a representation of the chat at its initial stage.
+   * @returns {string}: Representation of the chat
+   */
+  getMinimumInfo () {
+    this.minimumInfo = `<${this.url}>`
+    return this.minimumInfo
+  }
 
-		// set the default uniqid function to the function of the package 'uniqid'
-		if (!options.uniqid) {
-			this.uniqid = require('uniqid');
-		} else {
-			this.uniqid = options.uniqid;
-		}
+  getUrl () {
+    return this.url
+  }
 
-	}
+  getInterlocutorWebId () {
+    return this.interlocutorWebId
+  }
 
-	/**
-	 * This method must return a representation of the chat at its initial stage.
-	 * @returns {string}: Representation of the chat
-	 */
-	getMinimumInfo() {
-		this.minimumInfo = `<${this.url}>`;
-		return this.minimumInfo;
+  loadMessage (message) {
+    this.messages[this.numberOfMessages] = message
+    this.numberOfMessages += 1
+  }
 
-	}
-
-	getUrl() {
-		return this.url;
-	}
-
-	getInterlocutorWebId() {
-		return this.interlocutorWebId;
-	}
-
-	loadMessage(message) {
-		this.messages[this.numberOfMessages] = message;
-		this.numberOfMessages += 1;
-	}
-
-
-	getMessages() {
-		return this.messages;
-	}
-
-
+  getMessages () {
+    return this.messages
+  }
 }
 
-module.exports = SemanticChat;
+module.exports = SemanticChat
