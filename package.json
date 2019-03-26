@@ -8,10 +8,11 @@
   ],
   "scripts": {
     "test": "mocha \"./test/*\"",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "build:web": "webpack --config webpack.config.js",
     "build": "ng build",
     "travisRepo": "./test/travisRepo.sh",
+    "test-with-coverage": "nyc --reporter text-lcov node_modules/.bin/_mocha --require @babel/register -R spec --timeout 100 && cat ./coverage/lcov.info | codacy-coverage && rm -rf ./coverage",
     "travis-deploy-once": "travis-deploy-once",
     "puml": "./node_modules/.bin/puml",
     "docs": "./node_modules/.bin/asciidoctorjs  adocs/index.adoc --destination-dir docs"
