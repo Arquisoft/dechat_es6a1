@@ -8,10 +8,9 @@
   ],
   "scripts": {
     "test": "mocha \"./test/*\"",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "build:web": "webpack --config webpack.config.js",
     "build": "ng build",
-    "test-with-coverage": "nyc --reporter text-lcov node_modules/.bin/_mocha --require @babel/register -R spec --timeout 100 && cat ./coverage/lcov.info | codacy-coverage && rm -rf ./coverage",
     "travisRepo": "./test/travisRepo.sh",
     "travis-deploy-once": "travis-deploy-once",
     "puml": "./node_modules/.bin/puml",
@@ -20,13 +19,13 @@
   "bin": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Arquisoft/dechat_es6a"
+    "url": "git+https://github.com/Arquisoft/dechat_es6a1"
   },
   "author": "Cristian Lado González <UO257126@uniovi.es>",
   "bugs": {
-    "url": "https://github.com/Arquisoft/dechat_es6a/issues"
+    "url": "https://github.com/Arquisoft/dechat_es6a1/issues"
   },
-  "homepage": "https://github.com/Arquisoft/dechat_es6a/blob/master/readme.adoc",
+  "homepage": "https://github.com/Arquisoft/dechat_es6a1/blob/master/readme.adoc",
   "devDependencies": {
     "@11ty/eleventy": "^0.7.1",
     "@babel/cli": "^7.2.3",
