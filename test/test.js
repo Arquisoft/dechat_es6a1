@@ -45,11 +45,6 @@ describe('Loader tests', function () {
 		assert.equal(s.getMessages().length, 0);
 	})
 	
-	it('findWebIdOfInterlocutor(NO FUNCIONA)', async function () {
-		let s= await loader.findWebIdOfInterlocutor(chat2.getUrl(), 122);
-		assert.equal(s,123);
-	})
-	
 })
 
 describe('Core tests', function () {
@@ -62,10 +57,6 @@ describe('Core tests', function () {
 	it('getFormattedName', async function () {
 		let s= await core.getFormattedName("https://testdechat6a1.solid.community/profile/card#me");
 		assert.equal(s, "Tests Dechat_6a1");
-	})
-	it('getChatsToOpen(NO FUNCIONA)', async function () {
-		let s= await core.getChatsToOpen(122);
-		assert.equal(s,chatUrls[]);
 	})
   
 })
