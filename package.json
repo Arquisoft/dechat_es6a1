@@ -2,7 +2,7 @@
   "name": "dechat_6a",
   "version": "0.0.1",
   "description": "Decentralized, solid-based chat",
-  "main": "src/index.js",
+  "main": "src/app.js",
   "presets": [
     "@babel/preset-es2016"
   ],

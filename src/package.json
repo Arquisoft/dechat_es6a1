@@ -2,7 +2,7 @@
   "name": "dechat_6a",
   "version": "0.0.1",
   "description": "Decentralized, solid-based chat",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "./node_modules/.bin/protractor test/e2e-tests/protractor.conf.js",
     "build:web": "webpack --config webpack.config.js",
