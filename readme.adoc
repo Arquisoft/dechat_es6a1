@@ -117,7 +117,7 @@ And then execute the following command:
 Lastly, run the command:
 
 ----
-http-server
+http-server ./src
 ----
 
 It will shows some IP addresses where the application will be available.
