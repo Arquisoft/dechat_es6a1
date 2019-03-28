@@ -7,7 +7,7 @@
     "@babel/preset-es2016"
   ],
   "scripts": {
-    "test": "nyc ./node_modules/mocha/bin/_mocha \"./test/*test.js\" ",
+    "test": "istanbul cover node_modules/mocha/bin/_mocha && codecov -F istanbul_mocha",
 	"cucumber": "./node_modules/.bin/cucumber-js ./test/cucumber/*.feature",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "build:web": "webpack --config webpack.config.js",
@@ -42,11 +42,13 @@
     "codecov": "^3.2.0",
     "coveralls": "^3.0.2",
     "eslint": "^5.x",
+    "expect.js": "^0.3.1",
     "gulp": "^4.0.0",
     "gulp-cli": "^2.0.1",
     "gulp-exec": "^3.0.2",
     "gulp-puml": "^0.1.24",
     "gulp-svg2png": "^2.0.2",
+    "istanbul": "^0.4.5",
     "jsdoc": "^3.5.5",
     "jshint": "^2.10.1",
     "minami": "^1.2.3",
