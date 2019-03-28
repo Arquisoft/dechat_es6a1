@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "test": "nyc ./node_modules/mocha/bin/_mocha \"./test/*test.js\" ",
-	"cucumber": "./node_modules/.bin/cucumber-js ./test/cucumber/*.feature",
+    "cucumber": "./node_modules/.bin/cucumber-js ./test/cucumber/*.feature",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "build:web": "webpack --config webpack.config.js",
     "build": "ng build",
