@@ -1,14 +1,9 @@
 language: node_js
 node_js:
-- "stable"
-install:
-  - npm install
-  - npm install -g codecov
-script:
-  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
-  - codecov
+  - "stable"
+  
 after_success: 
-- npm run cucumber
-- npm run coverage
+  - npm run cucumber
+  - npm run coverage
   
 
