@@ -58,5 +58,10 @@ describe('Core tests', function () {
 		let s= await core.getFormattedName("https://testdechat6a1.solid.community/profile/card#me");
 		assert.equal(s, "Tests Dechat_6a1");
 	})
+	
+	it('setUpNewChat ', async function () {
+		let s= await core.setUpNewChat ("https://testdechat6a1.solid.community/profile/card",150,151);
+		assert.equal(s, new SemanticChat({ url: "https://testdechat6a1.solid.community/profile/card#me", userWebId : 150, chatBaseUrl: "https://testdechat6a1.solid.community/profile/card#me", interlocutorWebId: 151 }););
+	})
   
 })
