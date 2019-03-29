@@ -59,9 +59,18 @@ describe('Core tests', function () {
 		assert.equal(s, "Tests Dechat_6a1");
 	})
 	
-	it('setUpNewChat ', async function () {
+	it('setUpNewChat(No funciona)', async function () {
 		let s= await core.setUpNewChat ("https://testdechat6a1.solid.community/profile/card",150,151);
-		assert.equal(s, new SemanticChat({ url: "https://testdechat6a1.solid.community/profile/card#me", userWebId : 150, chatBaseUrl: "https://testdechat6a1.solid.community/profile/card#me", interlocutorWebId: 151 }););
+		assert.equal(s, new SemanticChat({ url: "https://testdechat6a1.solid.community/profile/card#me", userWebId : 150, chatBaseUrl: "https://testdechat6a1.solid.community/profile/card", interlocutorWebId: 151 }););
+	})
+	
+	it('generateUniqueUrlForResource ', async function () {
+		let s= await core.generateUniqueUrlForResource("https://alvarogonzalezcarracedo2.solid.community/profile/card");
+		assert.equal(s,"https://alvarogonzalezcarracedo2.solid.community/profile/card#me");
+	})
+	
+	it('joinExistingChat', async function () {
+		let s= await core.joinExistingChat  ("https://testdechat6a1.solid.community/profile/card#me", "https://alvarogonzalezcarracedo2.solid.community/profile/card#me", "https://testdechat6a1.solid.community/profile/card#me", "https://alvarogonzalezcarracedo2.solid.community/private");
 	})
   
 })
