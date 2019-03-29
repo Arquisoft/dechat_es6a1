@@ -38,7 +38,7 @@ describe('Semantic chat constructor', function () {
 })
 
 describe('Loader tests', function () {
-	it('loadMessageFromURL', async function () {
+	it('loadMessageFromURL', function () {
 		let s= await loader.loadFromUrl("https://testdechat6a1.solid.community/profile/card#me", 123, "hola");
 		assert.equal(s.getUrl(), "https://testdechat6a1.solid.community/profile/card#me");
 		assert.equal(s.userWebId, 123);
