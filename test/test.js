@@ -46,7 +46,8 @@ describe('Loader tests', function () {
 	})
 	it('loadFromURL', async function () {
 		let chat = await loader.loadFromUrl("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl","https://alvarogonzalezcarracedo2.solid.community/profile/card#me","https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
-		assert.equal(chat, new SemanticChat({ url: "https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl", userWebId : "https://alvarogonzalezcarracedo2.solid.community/profile/card#me", chatBaseUrl: "https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl"}));
+		const name = await core.getFormattedName(chat.userWebId);
+        	assert.equal(name, 'Alvaro');
 	})
 	
 })
