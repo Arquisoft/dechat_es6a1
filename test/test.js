@@ -45,8 +45,8 @@ describe('Loader tests', function () {
 		assert.equal(s.getMessages().length, 0);
 	})
 	it('loadFromURL', async function () {
-		const chat = await loader.loadFromUrl("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl","https://alvarogonzalezcarracedo2.solid.community/profile/card#me","https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
-		asser.equal(chat, new SemanticChat({ url: "https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl", userWebId : "https://alvarogonzalezcarracedo2.solid.community/profile/card#me", chatBaseUrl: "https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl"});)
+		let chat = await loader.loadFromUrl("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl","https://alvarogonzalezcarracedo2.solid.community/profile/card#me","https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
+		assert.equal(chat, new SemanticChat({ url: "https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl", userWebId : "https://alvarogonzalezcarracedo2.solid.community/profile/card#me", chatBaseUrl: "https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl"});
 	})
 	
 })
