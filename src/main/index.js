@@ -29,6 +29,12 @@ $('.login-btn').click(() => {
   })
 })
 
+$('.login-btn-center').click(() => {
+  auth.popupLogin({
+    popupUri: 'https://solid.github.io/solid-auth-client/dist/popup.html'
+  })
+})
+
 /**
  *    This method is in charge of the user's logout
  */
