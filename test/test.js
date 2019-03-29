@@ -38,14 +38,14 @@ describe('Semantic chat constructor', function () {
 })
 
 describe('Loader tests', function () {
-	it('loadMessageFromURL', function () {
+	it('loadMessageFromURL', async function () {
 		let s= await loader.loadFromUrl("https://testdechat6a1.solid.community/profile/card#me", 123, "hola");
 		assert.equal(s.getUrl(), "https://testdechat6a1.solid.community/profile/card#me");
 		assert.equal(s.userWebId, 123);
 		assert.equal(s.getMessages().length, 0);
 	})
-	it('loadFromURL', async function () {
-		let chat = await loader.loadFromUrl("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl","https://alvarogonzalezcarracedo2.solid.community/profile/card#me","https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
+	it('loadFromURL', function () {
+		let chat = loader.loadFromUrl("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl","https://alvarogonzalezcarracedo2.solid.community/profile/card#me","https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
 		const name = await core.getFormattedName(chat.userWebId);
         	assert.equal(name, 'Alvaro');
 	})
