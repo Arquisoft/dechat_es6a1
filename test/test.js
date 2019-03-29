@@ -44,6 +44,10 @@ describe('Loader tests', function () {
 		assert.equal(s.userWebId, 123);
 		assert.equal(s.getMessages().length, 0);
 	})
+	it('loadFromURL', async function () {
+		const chat = await loader.loadFromUrl("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl","https://alvarogonzalezcarracedo2.solid.community/profile/card#me","https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
+		asser.equal(chat, new SemanticChat({ url: "https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl", userWebId : "https://alvarogonzalezcarracedo2.solid.community/profile/card#me", chatBaseUrl: "https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl"});)
+	})
 	
 })
 
@@ -73,10 +77,5 @@ describe('Core tests', function () {
 		let s= await core.joinExistingChat  ("https://testdechat6a1.solid.community/profile/card#me", "https://alvarogonzalezcarracedo2.solid.community/profile/card#me", "https://testdechat6a1.solid.community/profile/card#me", "https://alvarogonzalezcarracedo2.solid.community/private");
 	})
 	*/
-	it('getFormattedName', async function () {
-		const chat = await loader.loadFromUrl("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl","https://alvarogonzalezcarracedo2.solid.community/profile/card#me","https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
-		const name = await core.getFormattedName(chat.userWebId);
-       	 	assert.equal(name, 'Alvaro');
-	})
   
 })
