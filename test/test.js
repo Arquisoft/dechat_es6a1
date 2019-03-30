@@ -102,7 +102,7 @@ describe('Core tests', function () {
 	})
 	
 	it('getJoinRequest', async function () {
-		let s= await core.getJoinRequest "https://alvarogonzalezcarracedo2.solid.community/inbox/","https://alvarogonzalezcarracedo2.solid.community/profile/card#me");
+		let s= await core.getJoinRequest("https://alvarogonzalezcarracedo2.solid.community/inbox/","https://alvarogonzalezcarracedo2.solid.community/profile/card#me");
 		assert.equal(s,null);
 	})
   
