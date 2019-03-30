@@ -95,5 +95,15 @@ describe('Core tests', function () {
 		let s= await core.getInboxUrl("https://testdechat6a1.solid.community/profile/card#me");
 		assert.equal(s, "https://testdechat6a1.solid.community/inbox/");
 	})
+	
+	it('checkUserInboxForUpdates', async function () {
+		let s= await core.checkUserInboxForUpdates ("https://alvarogonzalezcarracedo2.solid.community/inbox/");
+		assert.equal(s.length,0);
+	})
+	
+	it('getJoinRequest', async function () {
+		let s= await core.getJoinRequest "https://alvarogonzalezcarracedo2.solid.community/inbox/","https://alvarogonzalezcarracedo2.solid.community/profile/card#me");
+		assert.equal(s,null);
+	})
   
 })
