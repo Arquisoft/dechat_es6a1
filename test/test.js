@@ -16,6 +16,8 @@ const core = new DeChatCore(auth.fetch);
 const DataSync = require('../src/lib/datasync');
 const dataSync = new DataSync(auth.fetch);
 
+const rdf = require('../src/lib/rdfjssourcefactory');
+
 describe('Simple test', function () {
   it('2 + 2 = 4', function () {
     assert.equal(2+2, 4);
@@ -46,6 +48,14 @@ describe('Loader tests', function () {
 		assert.equal(s.getUrl(), "https://testdechat6a1.solid.community/profile/card#me");
 		assert.equal(s.userWebId, 123);
 		assert.equal(s.getMessages().length, 0);
+	})
+	
+})
+
+describe('rdf tests', function () {
+	it('fromString', function () {
+		let s= rdf.fromString("Cristian Lado González");
+		assert.equal(s.resolves, undefined);
 	})
 	
 })
@@ -96,15 +106,15 @@ describe('Core tests', function () {
 		assert.equal(s, "https://testdechat6a1.solid.community/inbox/");
 	})
 	
-	it('checkUserInboxForUpdates', async function () {
-		let s= await core.checkUserInboxForUpdates ("https://alvarogonzalezcarracedo2.solid.community/inbox/");
-		//assert.equal(s.length,0);
+	it('checkUserInboxForUpdates', function () {
+		let s= core.checkUserInboxForUpdates("https://alvarogonzalezcarracedo2.solid.community/inbox/");
+		assert.equal(s.resolves, undefined);
 	})
 	
-	it('getJoinRequest', async function () {
+	it('getJoinRequest', function () {
 		const file=dataSync.createEmptyFileForUser("https://alvarogonzalezcarracedo2.solid.community/private/test");
-		let s= await core.getJoinRequest("https://alvarogonzalezcarracedo2.solid.community/private/test","https://alvarogonzalezcarracedo2.solid.community/profile/card#me");
-		assert.equal(s,null);
+		let s= core.getJoinRequest("https://alvarogonzalezcarracedo2.solid.community/private/test","https://alvarogonzalezcarracedo2.solid.community/profile/card#me");
+		assert.equal(s.resolves, undefined);
 	})
   
 })
