@@ -56,6 +56,21 @@ describe('Loader tests', function () {
 		assert.equal(s.getMessages().length, 0);
 	})
 	
+	it('_findMessage ', async function () {
+		let s= await loader._findMessage ("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
+		assert.equal(s, "asd");
+	})
+	
+	it('findWebIdOfInterlocutor  ', async function () {
+		let s= await loader.findWebIdOfInterlocutor("https://alvarogonzalezcarracedo2.solid.community/profile/card#me","https://alvarogonzalezcarracedo2.solid.community/profile/card#me");
+		assert.equal(s.resolves, undefined);
+	})
+	
+	it('_getObjectFromPredicateForResource', async function () {
+		let s= await loader._getObjectFromPredicateForResource ("https://testdechat6a1.solid.community/profile/card#me","Predicate");
+		assert.equal(s.resolves, undefined);
+	})
+	
 })
 
 describe('rdf tests', function () {
