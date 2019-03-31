@@ -58,12 +58,12 @@ describe('Loader tests', function () {
 	
 	it('_findMessage ', async function () {
 		let s= await loader._findMessage ("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
-		assert.equal(s, "asd");
+		assert.equal(s.includes("asd"));
 	})
 	
 	it('findWebIdOfInterlocutor  ', async function () {
-		let s= await loader.findWebIdOfInterlocutor("https://alvarogonzalezcarracedo2.solid.community/profile/card#me","https://alvarogonzalezcarracedo2.solid.community/profile/card#me");
-		assert.equal(s.resolves, undefined);
+		let s= await loader.findWebIdOfInterlocutor(chat2.getUrl(),122);
+		assert.equal(s.resolves, 123);
 	})
 	
 	it('_getObjectFromPredicateForResource', async function () {
