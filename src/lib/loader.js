@@ -21,7 +21,7 @@ class Loader {
   /**
    * This method loads the messages from the url passed through the parameter
    */
-  async loadFromUrl (chatUrl, userWebId, chatBaseUrl) {
+   async loadFromUrl (chatUrl, userWebId, chatBaseUrl) {
     // const interlocutorWebId = await this.findWebIdOfInterlocutor(chatUrl, userWebId);
     // console.log(interlocutorWebId);
 

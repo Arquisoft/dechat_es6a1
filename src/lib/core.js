@@ -562,6 +562,7 @@ class DeChatCore {
     }
 
     dataSync.deleteFileForUser(fileUrl)
+	return chatUrl;
   }
 
   async generateResponseToInvitation (baseUrl, invitationUrl, userWebId, interlocutorWebId, response) {
