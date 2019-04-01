@@ -29,12 +29,6 @@ $('.login-btn').click(() => {
   })
 })
 
-$('.login-btn-center').click(() => {
-  auth.popupLogin({
-    popupUri: 'https://solid.github.io/solid-auth-client/dist/popup.html'
-  })
-})
-
 /**
  *    This method is in charge of the user's logout
  */
@@ -59,8 +53,8 @@ auth.trackSession(async session => {
   if (loggedIn) {
     $('#user-menu').removeClass('hidden')
     $('#nav-login-btn').addClass('hidden')
-    $('#login-content').addClass('hidden')
     $('#login-required').modal('hide')
+    $('.wrap').removeClass('hidden')
 
     userWebId = session.webId
     const name = await core.getFormattedName(userWebId)
