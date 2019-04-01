@@ -82,6 +82,19 @@ describe('rdf tests', function () {
 	
 })
 
+describe('datasync tests', function () {
+	it('createEmptyFileForUser', function () {
+		let s= dataSync.createEmptyFileForUser("https://testdechat6a1.solid.community/private/test");
+		assert.equal(s.includes("https://testdechat6a1.solid.community/private/test"));
+	})
+	
+	it('deleteFileForUser ', function () {
+		let s= dataSync.deleteFileForUser ("https://testdechat6a1.solid.community/private/test");
+		assert.notEqual(s.includes("https://testdechat6a1.solid.community/private/test"));
+	})
+	
+})
+
 describe('Core tests', function () {
 	it('core constructor', function () {
 		assert.equal(core.alreadyCheckedResources.length, 0);
