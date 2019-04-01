@@ -56,20 +56,25 @@ describe('Loader tests', function () {
 		assert.equal(s.getMessages().length, 0);
 	})
 	
-	it('_findMessage', async function () {
-		let s= await loader._findMessage("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl");
-		assert.equal(s.includes("asd"));
-		//assert.equal(s.resolves, undefined);
+	it('_findMessage', function () {
+		let s= loader._findMessage("https://alvarogonzalezcarracedo2.solid.community/private/dechat_201903291235.ttl")
+			.then(function(value){
+				assert.equal(value.includes("asd"));
+			});
 	})
 	
-	it('findWebIdOfInterlocutor  ', async function () {
-		let s= await loader.findWebIdOfInterlocutor(chat2.getUrl(),122);
-		assert.equal(s,123);
+	it('findWebIdOfInterlocutor  ', function () {
+		let s= loader.findWebIdOfInterlocutor(chat2.getUrl(),122)
+		.then(function(value){
+				assert.equal(value,123);
+			});
 	})
 	
-	it('_getObjectFromPredicateForResource', async function () {
-		let s= await loader._getObjectFromPredicateForResource ("https://testdechat6a1.solid.community/profile/card#me","Predicate");
-		assert.equal(s.resolves, undefined);
+	it('_getObjectFromPredicateForResource', function () {
+		let s= loader._getObjectFromPredicateForResource ("https://testdechat6a1.solid.community/profile/card#me","Predicate")
+		.then(function(value){
+				assert.equal(value, undefined);
+			});
 	})
 	
 })
