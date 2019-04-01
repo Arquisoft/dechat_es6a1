@@ -2,7 +2,10 @@
 == Runtime View
 
 ****
-.Disclaimer
-At the current stage of the project, there is not enough information available to complete this section.
-Further decisions are required in order to provide any substantial data on this subject.
+.Contents
+In this section we will explain the user interaction with dechat
 ****
+
+**Graphic representation**
+
+image::https://github.com/Arquisoft/dechat_es6a1/blob/docs/scope/src/docs/images/RuntimeView.jpg[Settings gh-pages,600]
