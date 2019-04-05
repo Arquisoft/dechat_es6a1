@@ -11,8 +11,6 @@ const {
 const rdfjsSourceFromUrl = require('./rdfjssourcefactory').fromUrl
 const SemanticChat = require('./semanticchat')
 const Loader = require('./loader')
-const SemanticGroupChat = require('./semanticGroupchat')
-const LoaderGroup = require('./loaderGroup')
 
 class DeChatCore {
   constructor (fetch) {

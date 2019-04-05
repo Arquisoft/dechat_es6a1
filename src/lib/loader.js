@@ -32,16 +32,7 @@ class Loader {
       userWebId
       // interlocutorWebId
     })
-    console.log('C')
-    const messages = await this._findMessage(chatUrl)
-    // console.log("friendWebId in loader.js is: " +interlocutorWebId);
-    // console.log(messages);
-    // console.log(messages.length);
-
-    for (var i = 0, len = messages.length; i < len; i++) {
-      chat.loadMessage(messages[i])
-    }
-    return chat
+	return await loadFromUrl(chat, chatUrl);
   }
 
   /**

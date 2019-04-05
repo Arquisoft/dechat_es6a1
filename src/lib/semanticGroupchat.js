@@ -12,7 +12,7 @@ class SemanticGroupChat extends SemanticChat{
     }
 	
   getInterlocutorsWebId () {
-    return this.interlocutorWebId
+    return this.interlocutorsWebId
   }
 
-module.exports = SemanticChat
+module.exports = SemanticGroupChat
