@@ -5,6 +5,7 @@ const streamify = require('streamify-array')
 const namespaces = require('./namespaces')
 const SemanticChat = require('./semanticchat')
 
+
 /**
  * The Loader allows creating a Semantic Chess instance via information loaded from an url.
  */
