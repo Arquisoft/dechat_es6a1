@@ -209,6 +209,54 @@ class DeChatCore {
 
     return semanticChat
   }
+  async setUpNewGroupChat (userDataUrl, userWebId, interlocutorsId, dataSync) {
+    const chatUrl = await this.generateUniqueUrlForResource(userDataUrl)
+    const semanticGroupChat = new SemanticChat({
+      url: chatUrl,
+      messageBaseUrl: userDataUrl,
+      userWebId,
+      interlocutorsWebId:interlocutorsId
+    })
+
+    try {
+      await dataSync.executeSPARQLUpdateForUser(userWebId, `INSERT DATA { <${chatUrl}> <${namespaces.schema}contributor> <${userWebId}>; 
+			<${namespaces.schema}recipient> <${interlocutorsId}>;
+			<${namespaces.storage}storeIn> <${userDataUrl}>.}`)
+    } catch (e) {
+      this.logger.error(`Could not add chat to WebId.`)
+      this.logger.error(e)
+    }
+
+	interlocutorsId.forEach(async (interlocutorWebId) => {
+		if (interlocutorsId.length > 1) {
+                id = "Group/" + setUpNewGroupChat.interlocutorWebId + "----" + userWebId;
+                interlocutorsId.forEach(async interlocWebId => {
+                    if (interlocWebId !== interlocutorWebId) {
+                        id += "----" + (interlocWebId.id ? interlocWebId.id : interlocWebId);
+                    }
+                });
+
+        }
+		
+		var invitation = await this.generateInvitation(userDataUrl, semanticGroupChat.getUrl(), userWebId, (interlocutorWebId.id ? interlocutorWebId.id : interlocutorWebId));
+
+		try {
+			await dataSync.executeSPARQLUpdateForUser(userDataUrl, `INSERT DATA {${invitation.sparqlUpdate}}`)
+		} catch (e) {
+			this.logger.error(`Could not save invitation for chat.`)
+			this.logger.error(e)
+		}
+
+		try {
+			await dataSync.sendToInterlocutorInbox(await this.getInboxUrl(interlocutorWebId), invitation.notification)
+		} catch (e) {
+			this.logger.error(`Could not send invitation to interlocutor.`)
+			this.logger.error(e)
+		}	
+	});
+
+    return semanticGroupChat
+  }
 
 
   async generateUniqueUrlForResource (baseurl) {

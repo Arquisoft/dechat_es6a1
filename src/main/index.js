@@ -12,12 +12,15 @@ const Loader = require('../lib/loader')
 let core = new Core(auth.fetch)
 let userWebId
 let interlocWebId
+let interlocsWebId=[]
+let contactsOfGroup = [];
 let refreshIntervalId
 let dataSync = new DataSync(auth.fetch)
 let userDataUrl
 let chatsToJoin = []
 let interlocutorMessages = []
 let semanticChat
+let semanticGroupChat
 let openChat = false
 
 /**
@@ -70,12 +73,38 @@ auth.trackSession(async session => {
     // alert("you're not logged in");
     $('#nav-login-btn').removeClass('hidden')
     $('#user-menu').addClass('hidden')
+	$('#new-group-options').addClass('hidden')
     $('#new-chat-options').addClass('hidden')
     $('#join-chat-options').addClass('hidden')
     $('#open-chat-options').addClass('hidden')
     userWebId = null
     clearInterval(refreshIntervalId)
     refreshIntervalId = null
+  }
+})
+
+/**
+ *    This button is in charge of showing the create group chat option
+ */
+$('#group-btn').click(async () => {
+  if (userWebId) {
+    afterChatOption()
+    $('#new-group-options').removeClass('hidden')
+    $('#data-url').prop('value', core.getDefaultDataUrl(userWebId))
+
+    const $select = $('#contacts')
+
+    for await (const friend of data[userWebId].friends) {
+      let name = await core.getFormattedName(friend.value)
+
+      $select.append(`<option value="${friend}">${name}</option>`)
+	  $('#add-to-group-btn').click(async () => {
+		  contactsOfGroup.push(friend.value);
+	  });
+    }
+  } else {
+    // alert("NOT logged in");
+    $('#login-required').modal('show')
   }
 })
 
@@ -119,6 +148,23 @@ $('#start-new-chat-btn').click(async () => {
 })
 
 /**
+ *    This method is in charge of starting a new group chat with the friends selected from the option menu
+ */
+$('#start-new-group-btn').click(async () => {
+  const dataUrl = $('#data-url').val()
+
+  if (await core.writePermission(dataUrl, dataSync)) {
+    $('#new-group-options').addClass('hidden')
+    interlocsWebId = $('#contacts').val()
+    userDataUrl = dataUrl
+    setUpNewGroupConversation()
+  } else {
+    $('#write-permission-url').text(dataUrl)
+    $('#write-permission').modal('show')
+  }
+})
+
+/**
  *    This method is in charge of setting up a new Conversation
  */
 async function setUpNewConversation () {
@@ -128,6 +174,17 @@ async function setUpNewConversation () {
   semanticChat = await core.setUpNewChat(userDataUrl, userWebId, interlocWebId, dataSync)
 
   setUpChat()
+}
+/**
+ *    This method is in charge of setting up a new Conversation
+ */
+async function setUpNewGroupConversation () {
+  // Initialize conversation
+  setUpForEveryChatOption()
+
+  semanticGroupChat = await core.setUpNewGroupChat(userDataUrl, userWebId, contactsOfGroup, dataSync)
+
+  setUpGroupChat()
 }
 
 /**
@@ -334,6 +391,54 @@ async function setUpChat () {
     }
   }
 
+  openChat = true
+}
+/**
+ *    This method is in charge of setting up a chat and hiding the buttons start, join and chat.
+ */
+async function setUpGroupChat () {
+  if (semanticGroupChat) {
+    // console.log(semanticChat.getMessages());
+    semanticGroupChat.getMessages().forEach(async (message) => {
+      $('#messagesarea').val($('#messagesarea').val() + '\n' + message.author + ' [' + message.time + ']> ' + message.messagetext)
+    })
+  }
+
+  $('#chat').removeClass('hidden')
+  $('#chat-loading').addClass('hidden')
+  $('#open-chats').addClass('hidden')
+  $('#open-chats-options').addClass('hidden')
+
+interlocsWebId.forEach(async (interlocutorWebId) => {
+  const intName = await core.getFormattedName(interlocutorWebId)
+
+  $('#interlocutor-name').text(intName)
+
+  // const message = $("#message").val();
+  var i = 0
+  // console.log("interloc WEBID is :" + interlocWebId); //Decker.solid.community/....
+
+  while (i < interlocutorMessages.length) {
+    // console.log("interloc author is: " + interlocutorMessages[i].author); //...../Deker //Yarrick is better
+    var nameThroughUrl = interlocutorMessages[i].author.split('/').pop()
+    console.log('nombre de authorUrl is:' + nameThroughUrl)
+    console.log('original interlocutorName is:' + intName)
+    if (nameThroughUrl === intName) {
+      $('#messagesarea').val($('#messagesarea').val() + '\n' + intName + ' [' + interlocutorMessages[i].time + ']> ' + interlocutorMessages[i].messageTx)
+      await core.storeMessage(userDataUrl, interlocutorMessages[i].author, userWebId, interlocutorMessages[i].time, interlocutorMessages[i].messageTx, interlocutorWebId, dataSync, false)
+      dataSync.deleteFileForUser(interlocutorMessages[i].inboxUrl)
+      interlocutorMessages[i] = 'D'
+      console.log('Matching names. All Correct')
+    }
+    i++
+  }
+  i = interlocutorMessages.length
+  while (i--) {
+    if (interlocutorMessages[i] == 'D') {
+      interlocutorMessages.splice(i, 1)
+    }
+  }
+});
   openChat = true
 }
 
