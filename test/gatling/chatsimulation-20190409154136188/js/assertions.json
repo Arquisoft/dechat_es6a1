@@ -1,0 +1,10 @@
+{
+  "simulation": "dechat_es6a1.ChatSimulation",
+  "simulationId": "chatsimulation",
+  "start": 1554824496188,
+  "description": "",
+  "scenarios": ["ChatSimulation"],
+  "assertions": [
+
+  ]
+}
