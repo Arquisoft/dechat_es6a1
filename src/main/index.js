@@ -98,10 +98,14 @@ $('#group-btn').click(async () => {
       let name = await core.getFormattedName(friend.value)
 
       $select.append(`<option value="${friend}">${name}</option>`)
-	  $('#add-to-group-btn').click(async () => {
-		  contactsOfGroup.push(friend.value);
-	  });
+	  
     }
+	
+	$('#add-to-group-btn').click(async () => {
+		  contactsOfGroup.push($select[0].value);
+		  $('#members').append(`<label for="data-url">${$select[0].value}</label>`)
+	  });
+	  
   } else {
     // alert("NOT logged in");
     $('#login-required').modal('show')
