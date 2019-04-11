@@ -502,7 +502,6 @@ class DeChatCore {
 
           result.bindingsStream.on('end', function () {
             if (!invitationFound) {
-              console.log('NO')
               deferred.resolve(null)
             }
           })
@@ -694,7 +693,6 @@ class DeChatCore {
   async getNewMessage (fileurl, userWebId) {
     const deferred = Q.defer()
     const rdfjsSource = await rdfjsSourceFromUrl(fileurl, this.fetch)
-    console.log('DA')
     if (rdfjsSource) {
       const engine = newEngine()
       let messageFound = false

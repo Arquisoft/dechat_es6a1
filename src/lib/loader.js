@@ -32,7 +32,12 @@ class Loader {
       userWebId
       // interlocutorWebId
     })
-	return await loadFromUrl(chat, chatUrl);
+	const messages = await this._findMessage(chatUrl)
+
+    for (var i = 0, len = messages.length; i < len; i++) {
+      chat.loadMessage(messages[i])
+    }
+    return chat
   }
 
   /**

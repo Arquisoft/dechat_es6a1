@@ -90,9 +90,9 @@ $('#group-btn').click(async () => {
   if (userWebId) {
     afterChatOption()
     $('#new-group-options').removeClass('hidden')
-    $('#data-url').prop('value', core.getDefaultDataUrl(userWebId))
+    $('#data-url-group').prop('value', core.getDefaultDataUrl(userWebId))
 
-    const $select = $('#contacts')
+    const $select = $('#contactsGroup')
 
     for await (const friend of data[userWebId].friends) {
       let name = await core.getFormattedName(friend.value)
@@ -127,6 +127,7 @@ $('#new-btn').click(async () => {
       let name = await core.getFormattedName(friend.value)
 
       $select.append(`<option value="${friend}">${name}</option>`)
+	  
     }
   } else {
     // alert("NOT logged in");

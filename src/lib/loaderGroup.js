@@ -28,7 +28,12 @@ class Loadergroup extends Loader{
       userWebId
       interlocutorsWebId:interlocutors
     })
-    return await this.loadFromUrl(chat, chatUrl);
+    const messages = await this._findMessage(chatUrl)
+
+    for (var i = 0, len = messages.length; i < len; i++) {
+      chat.loadMessage(messages[i])
+    }
+    return chat
   }
   
 module.exports = Loadergroup
