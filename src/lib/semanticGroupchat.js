@@ -5,6 +5,7 @@ class SemanticGroupChat extends SemanticChat{
 	super(options);
     this.interlocutorsWebId = options.interlocutorsWebId
 	this.totalInterlocutorsWebId = 0
+  }
 
 	interlocutorsWebIdSave(interlocutorsWebId) {
         this.interlocutorsWebId[this.totalInterlocutorsWebId] = interlocutorsWebId;
@@ -14,5 +15,6 @@ class SemanticGroupChat extends SemanticChat{
   getInterlocutorsWebId () {
     return this.interlocutorsWebId
   }
+}
 
 module.exports = SemanticGroupChat

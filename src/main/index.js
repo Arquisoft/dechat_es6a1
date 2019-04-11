@@ -104,6 +104,7 @@ $('#group-btn').click(async () => {
 	$('#add-to-group-btn').click(async () => {
 		  contactsOfGroup.push($select[0].value);
 		  $('#members').append(`<label for="data-url">${$select[0].value}</label>`)
+		  interlocsWebId.push($select[0].value);
 	  });
 	  
   } else {
@@ -156,11 +157,10 @@ $('#start-new-chat-btn').click(async () => {
  *    This method is in charge of starting a new group chat with the friends selected from the option menu
  */
 $('#start-new-group-btn').click(async () => {
-  const dataUrl = $('#data-url').val()
+  const dataUrl = $('#data-url-group').val()
 
   if (await core.writePermission(dataUrl, dataSync)) {
     $('#new-group-options').addClass('hidden')
-    interlocsWebId = $('#contacts').val()
     userDataUrl = dataUrl
     setUpNewGroupConversation()
   } else {

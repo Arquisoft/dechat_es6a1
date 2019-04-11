@@ -10,6 +10,7 @@ const {
 } = require('date-fns')
 const rdfjsSourceFromUrl = require('./rdfjssourcefactory').fromUrl
 const SemanticChat = require('./semanticchat')
+const SemanticGroupchat = require('./semanticGroupchat')
 const Loader = require('./loader')
 
 class DeChatCore {
@@ -211,7 +212,7 @@ class DeChatCore {
   }
   async setUpNewGroupChat (userDataUrl, userWebId, interlocutorsId, dataSync) {
     const chatUrl = await this.generateUniqueUrlForResource(userDataUrl)
-    const semanticGroupChat = new SemanticChat({
+    const semanticGroupChat = new SemanticGroupchat({
       url: chatUrl,
       messageBaseUrl: userDataUrl,
       userWebId,
@@ -229,7 +230,7 @@ class DeChatCore {
 
 	interlocutorsId.forEach(async (interlocutorWebId) => {
 		if (interlocutorsId.length > 1) {
-                id = "Group/" + setUpNewGroupChat.interlocutorWebId + "----" + userWebId;
+                var id = "Group/" + interlocutorWebId + "----" + userWebId;
                 interlocutorsId.forEach(async interlocWebId => {
                     if (interlocWebId !== interlocutorWebId) {
                         id += "----" + (interlocWebId.id ? interlocWebId.id : interlocWebId);
