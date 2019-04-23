@@ -1,22 +1,39 @@
-const assert=require('assert');
-const { Given, When, Then }=require('cucumber');
+'use strict';
 
-function loginUser(user, psswd){
-	if(user==='testdechat6a1' && psswd==='Dechat_es6a1')
-		return "pass";
-	else
-		return "deny";
-}
+const assert = require('assert');
+var seleniumWebDriver = require ('selenium-webdriver');
 
-Given('{string} with password {string}', function(user, psswd){
-	this.user=user;
-	this.psswd=psswd;
-});
 
-When('I try to login him', function(){
-	this.response=loginUser(this.user, this.psswd);
-});
-
-Then('I should be told {string}', function(expected){
-	assert.equal(this.response, expected);
-});
+module.exports = function () {
+    
+    //----------------------- Test Login -------------------------
+    this.Given(/^a "([^"]*)" and "([^"]*)" and the user make login$/, function (user,password) {
+        //Parent --> First window
+        var parent = driver.getWindowHandle();
+        return helpers.loadPage("https://arquisoft.github.io/dechat_es6a1/")
+            .then(()=> {
+                    return driver.findElement(by.xpath("//*[@id='nav-login-btn']")).click()
+                        .then(() => {
+                            // select the newly opened window
+                            return driver.getAllWindowHandles().then(function gotWindowHandles(allhandles) {
+                                // Switching to Child window
+                                driver.switchTo().window(allhandles[allhandles.length - 1]);
+                                return driver.findElement(by.xpath("/html/body/div/div/div/button[4]")).click()
+                                    .then(() => {
+                                        driver.wait(until.elementsLocated(by.name("username")), 10000);
+                                        driver.findElement(By.name("username")).sendKeys(user); 
+                                        driver.findElement(By.name("password")).sendKeys(password); 
+                                        return driver.findElement(by.xpath("//*[@id='login']")).click().then(() => {
+                                            driver.switchTo().window(parent);
+                                            return driver.wait(until.elementsLocated(by.xpath("//*[@id='user-name']")), 20000);
+                                        })
+                                })
+                            });
+                    })
+                })
+    });
+    
+    this.Then(/^the login is successfull$/,function (){
+        return driver.wait(until.elementsLocated(by.xpath("//*[@id='user-name']")), 10000);
+    });
+};

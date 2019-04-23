@@ -3,10 +3,9 @@ Feature: Login at the system
 
   Scenario Outline: testdechat6a1 is an user
     Given "<user>" with password "<psswd>"
-    When I try to login him
-    Then I should be told "<response>"
+    Then the login is success
 	
     Examples:
-      | user | psswd | response |
-	  | testdechat6a1 | Dechat_es6a1 | pass |
-	  | testdechat6a1 | hello | deny |
+      | user | psswd |
+	  | testdechat6a1 | Dechat_es6a1 |
+	  | testdechat6a1 | hello |
