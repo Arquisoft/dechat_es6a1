@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "test": "nyc ./node_modules/mocha/bin/_mocha \"./test/*test.js\" ",
-    "cucumber": "node ./node_modules/selenium-cucumber-js/index.js -b firefox -s ./test/cucumber/*.feature -x 50000",
+    "cucumber": "node ./node_modules/selenium-cucumber-js/index.js -b firefox -s ./features/step -x 50000",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "build:web": "webpack --config webpack.config.js",
     "build": "ng build",
@@ -64,6 +64,8 @@
     "@solid/query-ldflex": "^1.1.1",
     "codacy-coverage": "^3.4.0",
     "cucumber": "^5.1.0",
+    "selenium-cucumber-js": "^1.6.2",
+    "selenium-webdriver": "^4.0.0-alpha.1",
     "date-fns": "^2.0.0-alpha.25",
     "inquirer": "^6.2.0",
     "istanbul": "^0.4.5",

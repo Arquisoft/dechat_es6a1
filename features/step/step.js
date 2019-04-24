@@ -6,8 +6,8 @@ var seleniumWebDriver = require ('selenium-webdriver');
 
 module.exports = function () {
     
-    //----------------------- Test Login -------------------------
-    this.Given(/^a "([^"]*)" and "([^"]*)" and the user make login$/, function (user,password) {
+    //Test Login existing user
+    this.Given(/^"([^"]*)" with password "([^"]*)"$/, function (user,password) {
         //Parent --> First window
         var parent = driver.getWindowHandle();
         return helpers.loadPage("https://arquisoft.github.io/dechat_es6a1/")
@@ -33,7 +33,7 @@ module.exports = function () {
                 })
     });
     
-    this.Then(/^the login is successfull$/,function (){
+    this.Then(/^the login is success$/,function (){
         return driver.wait(until.elementsLocated(by.xpath("//*[@id='user-name']")), 10000);
     });
 };
