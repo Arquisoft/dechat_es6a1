@@ -1,79 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-    <testsuite name="login-at-the-system;testdechat6a1-is-an-user" tests="2" failures="1" skipped="1">
+    <testsuite name="login-at-the-system;testdechat6a1-is-an-user" tests="2" failures="0" skipped="0">
         <properties>
             <property name="URI" value="C:/Users/Cristian/Desktop/master/dechat_es6a1/features/login_existing_user.feature">
             </property>
         </properties>
-        <testcase name="Given &quot;testdechat6a1&quot; with password &quot;Dechat_es6a1&quot;" classname="login-at-the-system;testdechat6a1-is-an-user" time="10.482969189">
-            <failure message="NoSuchElementError: Unable to locate element: //*[@id=&apos;nav-login-btn&apos;]">NoSuchElementError: Unable to locate element: //*[@id=&apos;nav-login-btn&apos;]
-    at Object.throwDecodedError (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\error.js:497:15)
-    at parseHttpResponse (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\http.js:519:13)
-    at doSend.then.response (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\http.js:441:30)
-    at process._tickCallback (internal/process/next_tick.js:68:7)
-From: Task: WebDriver.findElement(By(xpath, //*[@id=&apos;nav-login-btn&apos;]))
-    at thenableWebDriverProxy.schedule (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:807:17)
-    at thenableWebDriverProxy.findElement (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:1014:17)
-    at helpers.loadPage.then (C:\Users\Cristian\Desktop\master\dechat_es6a1\features\step\step.js:15:35)
-    at ManagedPromise.invokeCallback_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:1384:14)
-    at TaskQueue.execute_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:3092:14)
-    at TaskQueue.executeNext_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:3075:27)
-    at asyncRun (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:2935:27)
-    at C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:676:7
-    at process._tickCallback (internal/process/next_tick.js:68:7)
-From: Task: WebElement.click()
-    at thenableWebDriverProxy.schedule (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:807:17)
-    at WebElementPromise.schedule_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:2015:25)
-    at WebElementPromise.click (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:2096:17)
-    at helpers.loadPage.then (C:\Users\Cristian\Desktop\master\dechat_es6a1\features\step\step.js:15:85)
-    at ManagedPromise.invokeCallback_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:1384:14)
-    at TaskQueue.execute_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:3092:14)
-    at TaskQueue.executeNext_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:3075:27)
-    at asyncRun (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:2935:27)
-    at C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:676:7
-    at process._tickCallback (internal/process/next_tick.js:68:7)</failure>
+        <testcase name="Given &quot;testdechat6a1&quot; with password &quot;Dechat_es6a1&quot;" classname="login-at-the-system;testdechat6a1-is-an-user" time="14.507101878">
         </testcase>
-        <testcase name="Then the login is success" classname="login-at-the-system;testdechat6a1-is-an-user">
-            <skipped message="">
-            </skipped>
+        <testcase name="Then the login is success" classname="login-at-the-system;testdechat6a1-is-an-user" time="0.008008438">
         </testcase>
     </testsuite>
-    <testsuite name="login-at-the-system;testdechat6a1-is-an-user" tests="2" failures="1" skipped="1">
+    <testsuite name="login-at-the-system;testdechat6a1-is-an-user" tests="2" failures="0" skipped="0">
         <properties>
             <property name="URI" value="C:/Users/Cristian/Desktop/master/dechat_es6a1/features/login_existing_user.feature">
             </property>
         </properties>
-        <testcase name="Given &quot;testdechat6a1&quot; with password &quot;hello&quot;" classname="login-at-the-system;testdechat6a1-is-an-user" time="8.918913723">
-            <failure message="NoSuchElementError: Unable to locate element: //*[@id=&apos;nav-login-btn&apos;]">NoSuchElementError: Unable to locate element: //*[@id=&apos;nav-login-btn&apos;]
-    at Object.throwDecodedError (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\error.js:497:15)
-    at parseHttpResponse (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\http.js:519:13)
-    at doSend.then.response (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\http.js:441:30)
-    at process._tickCallback (internal/process/next_tick.js:68:7)
-From: Task: WebDriver.findElement(By(xpath, //*[@id=&apos;nav-login-btn&apos;]))
-    at thenableWebDriverProxy.schedule (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:807:17)
-    at thenableWebDriverProxy.findElement (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:1014:17)
-    at helpers.loadPage.then (C:\Users\Cristian\Desktop\master\dechat_es6a1\features\step\step.js:15:35)
-    at ManagedPromise.invokeCallback_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:1384:14)
-    at TaskQueue.execute_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:3092:14)
-    at TaskQueue.executeNext_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:3075:27)
-    at asyncRun (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:2935:27)
-    at C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:676:7
-    at process._tickCallback (internal/process/next_tick.js:68:7)
-From: Task: WebElement.click()
-    at thenableWebDriverProxy.schedule (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:807:17)
-    at WebElementPromise.schedule_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:2015:25)
-    at WebElementPromise.click (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\webdriver.js:2096:17)
-    at helpers.loadPage.then (C:\Users\Cristian\Desktop\master\dechat_es6a1\features\step\step.js:15:85)
-    at ManagedPromise.invokeCallback_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:1384:14)
-    at TaskQueue.execute_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:3092:14)
-    at TaskQueue.executeNext_ (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:3075:27)
-    at asyncRun (C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:2935:27)
-    at C:\Users\Cristian\Desktop\master\dechat_es6a1\node_modules\selenium-cucumber-js\node_modules\selenium-webdriver\lib\promise.js:676:7
-    at process._tickCallback (internal/process/next_tick.js:68:7)</failure>
+        <testcase name="Given &quot;testdechat6a1&quot; with password &quot;hello&quot;" classname="login-at-the-system;testdechat6a1-is-an-user" time="14.409806084">
         </testcase>
-        <testcase name="Then the login is success" classname="login-at-the-system;testdechat6a1-is-an-user">
-            <skipped message="">
-            </skipped>
+        <testcase name="Then the login is success" classname="login-at-the-system;testdechat6a1-is-an-user" time="0.008464778">
+        </testcase>
+    </testsuite>
+    <testsuite name="logout-at-the-system;testdechat6a1-is-an-user" tests="2" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="C:/Users/Cristian/Desktop/master/dechat_es6a1/features/logout_existing_user.feature">
+            </property>
+        </properties>
+        <testcase name="Given &quot;testdechat6a1&quot; with password &quot;Dechat_es6a1&quot;, the user make login and log out" classname="logout-at-the-system;testdechat6a1-is-an-user" time="14.358983469">
+        </testcase>
+        <testcase name="Then the chat is shown" classname="logout-at-the-system;testdechat6a1-is-an-user" time="0.501293817">
         </testcase>
     </testsuite>
 </testsuites>
