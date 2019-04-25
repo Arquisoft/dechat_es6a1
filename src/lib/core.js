@@ -210,6 +210,7 @@ class DeChatCore {
 
     return semanticChat
   }
+  
   async setUpNewGroupChat (userDataUrl, userWebId, interlocutorsId, dataSync) {
     const chatUrl = await this.generateUniqueUrlForResource(userDataUrl)
     const semanticGroupChat = new SemanticGroupchat({
@@ -682,7 +683,40 @@ class DeChatCore {
 
     if (toSend) {
       try {
-        await dataSync.sendToInterlocutorInbox(await this.getInboxUrl(interlocutorWebId), sparqlUpdate)
+			await dataSync.sendToInterlocutorInbox(await this.getInboxUrl(interlocutorWebId), sparqlUpdate)
+      } catch (e) {
+        this.logger.error(`Could not send message to interlocutor.`)
+        console.log('Could not send')
+        this.logger.error(e)
+      }
+    }
+  }
+  
+  async storeGroupMessage (userDataUrl, username, userWebId, time, message, interlocutorsWebId, dataSync, toSend) {
+    const messageTx = message.replace(/ /g, 'U+0020')
+    const psUsername = username.replace(/ /g, 'U+0020')
+
+    const messageUrl = await this.generateUniqueUrlForResource(userDataUrl)
+    const sparqlUpdate = `
+		<${messageUrl}> a <${namespaces.schema}Message>;
+		  <${namespaces.schema}dateSent> <${time}>;
+		  <${namespaces.schema}givenName> <${psUsername}>;
+		  <${namespaces.schema}text> <${messageTx}>.
+	  `
+    // <${namespaces.schema}dateCreated> <${time}>;
+    try {
+      await dataSync.executeSPARQLUpdateForUser(userDataUrl, `INSERT DATA {${sparqlUpdate}}`)
+    } catch (e) {
+      console.log('NO GUARDA')
+      this.logger.error(`Could not save new message.`)
+      this.logger.error(e)
+    }
+
+    if (toSend) {
+      try {
+		  for(var interlocutor in interlocutorsWebId){
+			await dataSync.sendToInterlocutorInbox(await this.getInboxUrl(interlocutorsWebId[interlocutor]), sparqlUpdate)
+		  }
       } catch (e) {
         this.logger.error(`Could not send message to interlocutor.`)
         console.log('Could not send')

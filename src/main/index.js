@@ -117,6 +117,7 @@ $('#group-btn').click(async () => {
  *    This button is in charge of showing the create chat option
  */
 $('#new-btn').click(async () => {
+	interlocsWebId=[]
   if (userWebId) {
     afterChatOption()
     $('#new-chat-options').removeClass('hidden')
@@ -187,7 +188,7 @@ async function setUpNewGroupConversation () {
   // Initialize conversation
   setUpForEveryChatOption()
 
-  semanticGroupChat = await core.setUpNewGroupChat(userDataUrl, userWebId, contactsOfGroup, dataSync)
+  semanticGroupChat = await core.setUpNewGroupChat(userDataUrl, userWebId, interlocsWebId, dataSync)
 
   setUpGroupChat()
 }
@@ -404,7 +405,7 @@ async function setUpChat () {
  */
 async function setUpGroupChat () {
   if (semanticGroupChat) {
-    // console.log(semanticChat.getMessages());
+    
     semanticGroupChat.getMessages().forEach(async (message) => {
       $('#messagesarea').val($('#messagesarea').val() + '\n' + message.author + ' [' + message.time + ']> ' + message.messagetext)
     })
@@ -459,7 +460,10 @@ $('#write-chat').click(async () => {
   const time = '21' + dateFormat.format(now, 'yy-MM-dd') + 'T' + dateFormat.format(now, 'hh-mm-ss')
 
   $('#messagesarea').val($('#messagesarea').val() + '\n' + username + ' [' + time + ']> ' + message)
-  await core.storeMessage(userDataUrl, username, userWebId, time, message, interlocWebId, dataSync, true)
+  if(interlocsWebId.length==0)
+	await core.storeMessage(userDataUrl, username, userWebId, time, message, interlocWebId, dataSync, true)
+  else
+	  await core.storeGroupMessage(userDataUrl, username, userWebId, time, message, interlocsWebId, dataSync, true)
 
   document.getElementById('message').value = ''
 })
