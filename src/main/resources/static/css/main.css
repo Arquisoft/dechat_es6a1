@@ -3,7 +3,6 @@ body {
   color: black;
   font-size: 20px;
 }
-
 a {
   background-color: #1F1F26;
   color: white!important;
@@ -29,22 +28,13 @@ a {
 #content {
   margin-top: 50px;
 }
+#chat-options, #join-btn, #open-btn{
+  align-content: left;
+}
 
 #user-name {
   color: white;
   padding-left: 5px;
-}
-
-#how-it-works {
-  margin-top: 50px;
-}
-
-#custom-position-chk-group, #real-time-chk-group {
-  margin-bottom: 15px;
-}
-
-#game-details {
-  margin-top: 20px;
 }
 
 .hidden {
@@ -67,6 +57,8 @@ a {
 
 #table-title {
   width: 50%;
+}
+#messagesarea{
 }
 
 tr.clickable-row {
@@ -93,7 +85,6 @@ code {
   height: 100vh;
   min-width: 600px;
   max-width: 1200px;
-  margin: auto;
   box-shadow: 0 2px 2px #aaaaaa;
 }
 
