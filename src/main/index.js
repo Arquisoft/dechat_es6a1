@@ -344,6 +344,7 @@ $('.btn-cancel').click(() => {
 
   $('#chat').addClass('hidden')
   $('#new-chat-options').addClass('hidden')
+  $('#new-group-options').addClass('hidden')
   $('#join-chat-options').addClass('hidden')
   $('#open-chat-options').addClass('hidden')
   $('#chat-options').removeClass('hidden')
