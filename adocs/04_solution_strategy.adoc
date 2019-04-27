@@ -38,5 +38,3 @@ Let's highlight four fundamental decisions.
 
 - The process of development up to now consists of different phases, which have been developed by assignment of tasks.
 ****
-
-**"Unfinished document"**
