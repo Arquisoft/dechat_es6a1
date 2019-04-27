@@ -9,6 +9,9 @@ a {
   text-decoration: underline;
 }
 
+#write-chat, #leave-chat{
+	margin-top: 10px;
+}
 #login-required, #theme-selector, #write-permission, #invitation-response {
   color: crimson;
 }
@@ -28,8 +31,15 @@ a {
 #content {
   margin-top: 50px;
 }
-#chat-options, #join-btn, #open-btn{
+
+#chat-options{
+  align-content: center;
+}
+
+#new-chat-options, #join-btn, #open-btn{
   align-content: left;
+}
+#open-chat-table{
 }
 
 #user-name {
@@ -57,8 +67,6 @@ a {
 
 #table-title {
   width: 50%;
-}
-#messagesarea{
 }
 
 tr.clickable-row {
