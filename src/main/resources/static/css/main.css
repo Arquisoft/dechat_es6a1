@@ -1,20 +1,17 @@
 body {
-  background-image: url("../img/bg-repeat.png");
-  background-repeat: repeat;
-  background-color: ghostwhite;
-  color: white;
+  background-color: #AC63FF;
+  color: black;
+  font-size: 20px;
 }
-
 a {
+  background-color: #1F1F26;
   color: white!important;
   text-decoration: underline;
 }
 
-.container {
-  background-color: darkorchid;
-  padding-bottom: 20px;
+#write-chat, #leave-chat{
+	margin-top: 10px;
 }
-
 #login-required, #theme-selector, #write-permission, #invitation-response {
   color: crimson;
 }
@@ -35,21 +32,19 @@ a {
   margin-top: 50px;
 }
 
+#chat-options{
+  align-content: center;
+}
+
+#new-chat-options, #join-btn, #open-btn{
+  align-content: left;
+}
+#open-chat-table{
+}
+
 #user-name {
   color: white;
   padding-left: 5px;
-}
-
-#how-it-works {
-  margin-top: 50px;
-}
-
-#custom-position-chk-group, #real-time-chk-group {
-  margin-bottom: 15px;
-}
-
-#game-details {
-  margin-top: 20px;
 }
 
 .hidden {
@@ -93,4 +88,11 @@ code {
   color: antiquewhite;
 }
 
+.wrap {
+  display: flex;
+  height: 100vh;
+  min-width: 600px;
+  max-width: 1200px;
+  box-shadow: 0 2px 2px #aaaaaa;
+}
 
