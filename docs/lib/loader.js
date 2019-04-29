@@ -5,6 +5,7 @@ const streamify = require('streamify-array')
 const namespaces = require('./namespaces')
 const SemanticChat = require('./semanticchat')
 
+
 /**
  * The Loader allows creating a Semantic Chess instance via information loaded from an url.
  */
@@ -31,11 +32,8 @@ class Loader {
       userWebId
       // interlocutorWebId
     })
-    console.log('C')
-    const messages = await this._findMessage(chatUrl)
-    // console.log("friendWebId in loader.js is: " +interlocutorWebId);
-    // console.log(messages);
-    // console.log(messages.length);
+
+	const messages = await this._findMessage(chatUrl)
 
     for (var i = 0, len = messages.length; i < len; i++) {
       chat.loadMessage(messages[i])
