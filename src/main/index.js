@@ -37,6 +37,7 @@ $('.login-btn').click(() => {
  */
 $('#logout-btn').click(() => {
   auth.logout()
+  location.reload(true);
 })
 
 /**
@@ -57,6 +58,8 @@ auth.trackSession(async session => {
     $('#user-menu').removeClass('hidden')
     $('#nav-login-btn').addClass('hidden')
     $('#login-required').modal('hide')
+    $('.wrap').removeClass('hidden')
+    $('#chat-options').removeClass('hidden')
 
     userWebId = session.webId
     const name = await core.getFormattedName(userWebId)
