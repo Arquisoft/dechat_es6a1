@@ -12,12 +12,15 @@ const Loader = require('../lib/loader')
 let core = new Core(auth.fetch)
 let userWebId
 let interlocWebId
+let interlocsWebId=[]
+let contactsOfGroup = [];
 let refreshIntervalId
 let dataSync = new DataSync(auth.fetch)
 let userDataUrl
 let chatsToJoin = []
 let interlocutorMessages = []
 let semanticChat
+let semanticGroupChat
 let openChat = false
 
 /**
@@ -70,6 +73,7 @@ auth.trackSession(async session => {
     // alert("you're not logged in");
     $('#nav-login-btn').removeClass('hidden')
     $('#user-menu').addClass('hidden')
+	$('#new-group-options').addClass('hidden')
     $('#new-chat-options').addClass('hidden')
     $('#join-chat-options').addClass('hidden')
     $('#open-chat-options').addClass('hidden')
@@ -80,9 +84,40 @@ auth.trackSession(async session => {
 })
 
 /**
+ *    This button is in charge of showing the create group chat option
+ */
+$('#group-btn').click(async () => {
+  if (userWebId) {
+    afterChatOption()
+    $('#new-group-options').removeClass('hidden')
+    $('#data-url-group').prop('value', core.getDefaultDataUrl(userWebId))
+
+    const $select = $('#contactsGroup')
+
+    for await (const friend of data[userWebId].friends) {
+      let name = await core.getFormattedName(friend.value)
+
+      $select.append(`<option value="${friend}">${name}</option>`)
+	  
+    }
+	
+	$('#add-to-group-btn').click(async () => {
+		  contactsOfGroup.push($select[0].value);
+		  $('#members').append(`<label for="data-url">${$select[0].value}</label>`)
+		  interlocsWebId.push($select[0].value);
+	  });
+	  
+  } else {
+    // alert("NOT logged in");
+    $('#login-required').modal('show')
+  }
+})
+
+/**
  *    This button is in charge of showing the create chat option
  */
 $('#new-btn').click(async () => {
+	interlocsWebId=[]
   if (userWebId) {
     afterChatOption()
     $('#new-chat-options').removeClass('hidden')
@@ -94,6 +129,7 @@ $('#new-btn').click(async () => {
       let name = await core.getFormattedName(friend.value)
 
       $select.append(`<option value="${friend}">${name}</option>`)
+	  
     }
   } else {
     // alert("NOT logged in");
@@ -119,6 +155,22 @@ $('#start-new-chat-btn').click(async () => {
 })
 
 /**
+ *    This method is in charge of starting a new group chat with the friends selected from the option menu
+ */
+$('#start-new-group-btn').click(async () => {
+  const dataUrl = $('#data-url-group').val()
+
+  if (await core.writePermission(dataUrl, dataSync)) {
+    $('#new-group-options').addClass('hidden')
+    userDataUrl = dataUrl
+    setUpNewGroupConversation()
+  } else {
+    $('#write-permission-url').text(dataUrl)
+    $('#write-permission').modal('show')
+  }
+})
+
+/**
  *    This method is in charge of setting up a new Conversation
  */
 async function setUpNewConversation () {
@@ -128,6 +180,17 @@ async function setUpNewConversation () {
   semanticChat = await core.setUpNewChat(userDataUrl, userWebId, interlocWebId, dataSync)
 
   setUpChat()
+}
+/**
+ *    This method is in charge of setting up a new Conversation
+ */
+async function setUpNewGroupConversation () {
+  // Initialize conversation
+  setUpForEveryChatOption()
+
+  semanticGroupChat = await core.setUpNewGroupChat(userDataUrl, userWebId, interlocsWebId, dataSync)
+
+  setUpGroupChat()
 }
 
 /**
@@ -282,6 +345,7 @@ $('.btn-cancel').click(() => {
 
   $('#chat').addClass('hidden')
   $('#new-chat-options').addClass('hidden')
+  $('#new-group-options').addClass('hidden')
   $('#join-chat-options').addClass('hidden')
   $('#open-chat-options').addClass('hidden')
   $('#chat-options').removeClass('hidden')
@@ -336,6 +400,54 @@ async function setUpChat () {
 
   openChat = true
 }
+/**
+ *    This method is in charge of setting up a chat and hiding the buttons start, join and chat.
+ */
+async function setUpGroupChat () {
+  if (semanticGroupChat) {
+    
+    semanticGroupChat.getMessages().forEach(async (message) => {
+      $('#messagesarea').val($('#messagesarea').val() + '\n' + message.author + ' [' + message.time + ']> ' + message.messagetext)
+    })
+  }
+
+  $('#chat').removeClass('hidden')
+  $('#chat-loading').addClass('hidden')
+  $('#open-chats').addClass('hidden')
+  $('#open-chats-options').addClass('hidden')
+
+interlocsWebId.forEach(async (interlocutorWebId) => {
+  const intName = await core.getFormattedName(interlocutorWebId)
+
+  $('#interlocutor-name').text(intName)
+
+  // const message = $("#message").val();
+  var i = 0
+  // console.log("interloc WEBID is :" + interlocWebId); //Decker.solid.community/....
+
+  while (i < interlocutorMessages.length) {
+    // console.log("interloc author is: " + interlocutorMessages[i].author); //...../Deker //Yarrick is better
+    var nameThroughUrl = interlocutorMessages[i].author.split('/').pop()
+    console.log('nombre de authorUrl is:' + nameThroughUrl)
+    console.log('original interlocutorName is:' + intName)
+    if (nameThroughUrl === intName) {
+      $('#messagesarea').val($('#messagesarea').val() + '\n' + intName + ' [' + interlocutorMessages[i].time + ']> ' + interlocutorMessages[i].messageTx)
+      await core.storeMessage(userDataUrl, interlocutorMessages[i].author, userWebId, interlocutorMessages[i].time, interlocutorMessages[i].messageTx, interlocutorWebId, dataSync, false)
+      dataSync.deleteFileForUser(interlocutorMessages[i].inboxUrl)
+      interlocutorMessages[i] = 'D'
+      console.log('Matching names. All Correct')
+    }
+    i++
+  }
+  i = interlocutorMessages.length
+  while (i--) {
+    if (interlocutorMessages[i] == 'D') {
+      interlocutorMessages.splice(i, 1)
+    }
+  }
+});
+  openChat = true
+}
 
 /**
  *    This method is in charge of sending the message and showing it in the text Area
@@ -348,7 +460,10 @@ $('#write-chat').click(async () => {
   const time = '21' + dateFormat.format(now, 'yy-MM-dd') + 'T' + dateFormat.format(now, 'hh-mm-ss')
 
   $('#messagesarea').val($('#messagesarea').val() + '\n' + username + ' [' + time + ']> ' + message)
-  await core.storeMessage(userDataUrl, username, userWebId, time, message, interlocWebId, dataSync, true)
+  if(interlocsWebId.length==0)
+	await core.storeMessage(userDataUrl, username, userWebId, time, message, interlocWebId, dataSync, true)
+  else
+	  await core.storeGroupMessage(userDataUrl, username, userWebId, time, message, interlocsWebId, dataSync, true)
 
   document.getElementById('message').value = ''
 })

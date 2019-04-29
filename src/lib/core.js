@@ -10,6 +10,7 @@ const {
 } = require('date-fns')
 const rdfjsSourceFromUrl = require('./rdfjssourcefactory').fromUrl
 const SemanticChat = require('./semanticchat')
+const SemanticGroupchat = require('./semanticGroupchat')
 const Loader = require('./loader')
 
 class DeChatCore {
@@ -209,6 +210,56 @@ class DeChatCore {
 
     return semanticChat
   }
+  
+  async setUpNewGroupChat (userDataUrl, userWebId, interlocutorsId, dataSync) {
+    const chatUrl = await this.generateUniqueUrlForResource(userDataUrl)
+    const semanticGroupChat = new SemanticGroupchat({
+      url: chatUrl,
+      messageBaseUrl: userDataUrl,
+      userWebId,
+      interlocutorsWebId:interlocutorsId
+    })
+
+    try {
+      await dataSync.executeSPARQLUpdateForUser(userWebId, `INSERT DATA { <${chatUrl}> <${namespaces.schema}contributor> <${userWebId}>; 
+			<${namespaces.schema}recipient> <${interlocutorsId}>;
+			<${namespaces.storage}storeIn> <${userDataUrl}>.}`)
+    } catch (e) {
+      this.logger.error(`Could not add chat to WebId.`)
+      this.logger.error(e)
+    }
+
+	interlocutorsId.forEach(async (interlocutorWebId) => {
+		if (interlocutorsId.length > 1) {
+                var id = "Group/" + interlocutorWebId + "----" + userWebId;
+                interlocutorsId.forEach(async interlocWebId => {
+                    if (interlocWebId !== interlocutorWebId) {
+                        id += "----" + (interlocWebId.id ? interlocWebId.id : interlocWebId);
+                    }
+                });
+
+        }
+		
+		var invitation = await this.generateInvitation(userDataUrl, semanticGroupChat.getUrl(), userWebId, (interlocutorWebId.id ? interlocutorWebId.id : interlocutorWebId));
+
+		try {
+			await dataSync.executeSPARQLUpdateForUser(userDataUrl, `INSERT DATA {${invitation.sparqlUpdate}}`)
+		} catch (e) {
+			this.logger.error(`Could not save invitation for chat.`)
+			this.logger.error(e)
+		}
+
+		try {
+			await dataSync.sendToInterlocutorInbox(await this.getInboxUrl(interlocutorWebId), invitation.notification)
+		} catch (e) {
+			this.logger.error(`Could not send invitation to interlocutor.`)
+			this.logger.error(e)
+		}	
+	});
+
+    return semanticGroupChat
+  }
+
 
   async generateUniqueUrlForResource (baseurl) {
     let url = baseurl + '#' + uniqid()
@@ -453,7 +504,6 @@ class DeChatCore {
 
           result.bindingsStream.on('end', function () {
             if (!invitationFound) {
-              console.log('NO')
               deferred.resolve(null)
             }
           })
@@ -633,7 +683,40 @@ class DeChatCore {
 
     if (toSend) {
       try {
-        await dataSync.sendToInterlocutorInbox(await this.getInboxUrl(interlocutorWebId), sparqlUpdate)
+			await dataSync.sendToInterlocutorInbox(await this.getInboxUrl(interlocutorWebId), sparqlUpdate)
+      } catch (e) {
+        this.logger.error(`Could not send message to interlocutor.`)
+        console.log('Could not send')
+        this.logger.error(e)
+      }
+    }
+  }
+  
+  async storeGroupMessage (userDataUrl, username, userWebId, time, message, interlocutorsWebId, dataSync, toSend) {
+    const messageTx = message.replace(/ /g, 'U+0020')
+    const psUsername = username.replace(/ /g, 'U+0020')
+
+    const messageUrl = await this.generateUniqueUrlForResource(userDataUrl)
+    const sparqlUpdate = `
+		<${messageUrl}> a <${namespaces.schema}Message>;
+		  <${namespaces.schema}dateSent> <${time}>;
+		  <${namespaces.schema}givenName> <${psUsername}>;
+		  <${namespaces.schema}text> <${messageTx}>.
+	  `
+    // <${namespaces.schema}dateCreated> <${time}>;
+    try {
+      await dataSync.executeSPARQLUpdateForUser(userDataUrl, `INSERT DATA {${sparqlUpdate}}`)
+    } catch (e) {
+      console.log('NO GUARDA')
+      this.logger.error(`Could not save new message.`)
+      this.logger.error(e)
+    }
+
+    if (toSend) {
+      try {
+		  for(var interlocutor in interlocutorsWebId){
+			await dataSync.sendToInterlocutorInbox(await this.getInboxUrl(interlocutorsWebId[interlocutor]), sparqlUpdate)
+		  }
       } catch (e) {
         this.logger.error(`Could not send message to interlocutor.`)
         console.log('Could not send')
@@ -645,7 +728,6 @@ class DeChatCore {
   async getNewMessage (fileurl, userWebId) {
     const deferred = Q.defer()
     const rdfjsSource = await rdfjsSourceFromUrl(fileurl, this.fetch)
-    console.log('DA')
     if (rdfjsSource) {
       const engine = newEngine()
       let messageFound = false
