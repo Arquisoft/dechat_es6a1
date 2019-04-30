@@ -10,11 +10,7 @@ The chat is now available link:https://arquisoft.github.io/dechat_es6a1/[here]
 
 Cristian Lado González
 
-Mª Isabel Fernández Pérez
-
 Álvaro González Carracedo
-
-Jorge Iturrioz del Vigo
 
 == Getting started
 
